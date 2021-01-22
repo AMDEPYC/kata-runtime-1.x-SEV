@@ -1,0 +1,1 @@
+cmd_net/ipv6/netfilter/built-in.a := rm -f net/ipv6/netfilter/built-in.a; ar cDPrST net/ipv6/netfilter/built-in.a net/ipv6/netfilter/nf_defrag_ipv6_hooks.o net/ipv6/netfilter/nf_conntrack_reasm.o net/ipv6/netfilter/nf_log_ipv6.o net/ipv6/netfilter/nf_dup_ipv6.o

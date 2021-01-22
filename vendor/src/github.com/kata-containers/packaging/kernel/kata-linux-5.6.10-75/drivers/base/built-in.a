@@ -1,0 +1,56 @@
+!<thin>
+//                                              324       `
+component.o/
+core.o/
+bus.o/
+dd.o/
+syscore.o/
+driver.o/
+class.o/
+platform.o/
+cpu.o/
+firmware.o/
+init.o/
+map.o/
+devres.o/
+attribute_container.o/
+transport_class.o/
+topology.o/
+container.o/
+property.o/
+cacheinfo.o/
+devcon.o/
+swnode.o/
+devtmpfs.o/
+power/clock_ops.o/
+firmware_loader/main.o/
+memory.o/
+pinctrl.o/
+platform-msi.o/
+/0              0           0     0     644     14648     `
+/13             0           0     0     644     75184     `
+/21             0           0     0     644     30112     `
+/28             0           0     0     644     28864     `
+/34             0           0     0     644     3424      `
+/45             0           0     0     644     6944      `
+/55             0           0     0     644     13664     `
+/64             0           0     0     644     26872     `
+/76             0           0     0     644     15640     `
+/83             0           0     0     644     1752      `
+/95             0           0     0     644     2056      `
+/103            0           0     0     644     5104      `
+/110            0           0     0     644     21312     `
+/120            0           0     0     644     14552     `
+/143            0           0     0     644     5968      `
+/162            0           0     0     644     8640      `
+/174            0           0     0     644     2768      `
+/187            0           0     0     644     21160     `
+/199            0           0     0     644     16888     `
+/212            0           0     0     644     6672      `
+/222            0           0     0     644     21608     `
+/232            0           0     0     644     12784     `
+/244            0           0     0     644     3592      `
+/263            0           0     0     644     14864     `
+/287            0           0     0     644     19824     `
+/297            0           0     0     644     2496      `
+/308            0           0     0     644     11440     `

@@ -1,0 +1,934 @@
+Script started on 2020-10-14 04:26:13+00:00 [TERM="xterm" TTY="/dev/pts/1" COLUMNS="172" LINES="49"]
+INFO: Detecting agent go version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting golang version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required Go version: 1.11.10
+INFO: Detecting agent rust version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting rust version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required rust version: 1.38.0
+INFO: Detecting cmake version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting cmake version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required cmake version: 3.15.3
+INFO: Detecting musl version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting musl version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required musl version: 1.1.23
+/home/kata-containers/kata-runtime/vendor/src/github.com/kata-containers/osbuilder/rootfs-builder/centos /home/kata-containers/kata-runtime/vendor/src/github.com/kata-containers/osbuilder/rootfs-builder
+/home/kata-containers/kata-runtime/vendor/src/github.com/kata-containers/osbuilder/rootfs-builder
+Sending build context to Docker daemon   12.8kB
+Step 1/12 : From docker.io/centos:7
+ ---> 7e6257c9f8d8
+Step 2/12 : RUN yum -y update && yum install -y     autoconf     automake     binutils     chrony     coreutils     curl     gcc     gcc-c++     git     glibc-common     glibc-devel     glibc-headers     glibc-static     glibc-utils     libseccomp     libseccomp-devel     libstdc++-devel     libstdc++-static     m4     make     sed     tar     vim     which
+ ---> Using cache
+ ---> aa369d8528c8
+Step 3/12 : RUN pushd /root;     curl -sLO https://github.com/Kitware/CMake/releases/download/v3.15.3/cmake-3.15.3.tar.gz; 	tar -zxf cmake-3.15.3.tar.gz; 	cd cmake-3.15.3; 	./bootstrap > /dev/null 2>&1; 	make > /dev/null 2>&1; 	make install > /dev/null 2>&1; 	popd
+ ---> Using cache
+ ---> 07c63e2ba792
+Step 4/12 : RUN pushd /root;     curl -sLO https://www.musl-libc.org/releases/musl-1.1.23.tar.gz; tar -zxf musl-1.1.23.tar.gz; 	cd musl-1.1.23; 	sed -i "s/^ARCH = .*/ARCH = x86_64/g" dist/config.mak; 	./configure > /dev/null 2>&1; 	make > /dev/null 2>&1; 	make install > /dev/null 2>&1; 	echo "/usr/local/musl/lib" > /etc/ld-musl-x86_64.path; 	popd
+ ---> Using cache
+ ---> 56a050c62508
+Step 5/12 : ENV PATH=$PATH:/usr/local/musl/bin
+ ---> Using cache
+ ---> 6d0a1269d2ab
+Step 6/12 : RUN cd /tmp ; curl -OL https://storage.googleapis.com/golang/go1.11.10.linux-amd64.tar.gz
+ ---> Using cache
+ ---> d145c5b45141
+Step 7/12 : RUN tar -C /usr/ -xzf /tmp/go1.11.10.linux-amd64.tar.gz
+ ---> Using cache
+ ---> b3b758e4597a
+Step 8/12 : ENV GOROOT=/usr/go
+ ---> Using cache
+ ---> 5cd0c1e3834c
+Step 9/12 : ENV PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+ ---> Using cache
+ ---> 827b06b37e00
+Step 10/12 : RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSLf --output /tmp/rust-init;     chmod a+x /tmp/rust-init; 	export http_proxy=; 	export https_proxy=; 	/tmp/rust-init -y
+ ---> Using cache
+ ---> 85aed3e17e34
+Step 11/12 : RUN . /root/.cargo/env;     export http_proxy=; 	export https_proxy=; 	cargo install cargo-when; 	rustup toolchain install 1.38.0; 	rustup default 1.38.0; 	rustup target install x86_64-unknown-linux-musl
+ ---> Using cache
+ ---> 2447a7107c89
+Step 12/12 : RUN ln -sf /usr/bin/g++ /bin/musl-g++
+ ---> Using cache
+ ---> b1a91bcf999f
+Successfully built b1a91bcf999f
+Successfully tagged centos-rootfs-osbuilder:latest
+INFO: Detecting agent go version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting golang version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required Go version: 1.11.10
+INFO: Detecting agent rust version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting rust version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required rust version: 1.38.0
+INFO: Detecting cmake version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting cmake version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required cmake version: 3.15.3
+INFO: Detecting musl version
+INFO: Detecting runtime version using https://raw.githubusercontent.com/kata-containers/agent/master/VERSION
+INFO: Getting musl version from https://raw.githubusercontent.com/kata-containers/runtime/1.12.0-alpha1/versions.yaml
+Required musl version: 1.1.23
+Resolving Dependencies
+--> Running transaction check
+---> Package chrony.x86_64 0:3.4-1.el7 will be installed
+--> Processing Dependency: shadow-utils for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: rtld(GNU_HASH) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libpthread.so.0(GLIBC_2.2.5)(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libm.so.6(GLIBC_2.2.5)(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libfreebl3.so(NSSRAWHASH_3.12.3)(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libc.so.6(GLIBC_2.17)(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: /bin/sh for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: /bin/sh for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: /bin/bash for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libseccomp.so.2()(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libpthread.so.0()(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libm.so.6()(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libfreebl3.so()(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libedit.so.0()(64bit) for package: chrony-3.4-1.el7.x86_64
+--> Processing Dependency: libcap.so.2()(64bit) for package: chrony-3.4-1.el7.x86_64
+---> Package iptables.x86_64 0:1.4.21-34.el7 will be installed
+--> Processing Dependency: libnfnetlink.so.0()(64bit) for package: iptables-1.4.21-34.el7.x86_64
+--> Processing Dependency: libnetfilter_conntrack.so.3()(64bit) for package: iptables-1.4.21-34.el7.x86_64
+---> Package systemd.x86_64 0:219-73.el7.1 will be installed
+--> Processing Dependency: systemd-libs = 219-73.el7.1 for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: redhat-release >= 7.0 for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: kmod >= 18-4 for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: sed for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libpam.so.0(LIBPAM_1.0)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libmount.so.1(MOUNT_2.20)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libmount.so.1(MOUNT_2.19)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: liblzma.so.5(XZ_5.0)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libkmod.so.2(LIBKMOD_5)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libgcrypt.so.11(GCRYPT_1.2)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libgcc_s.so.1(GCC_3.3.1)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libgcc_s.so.1(GCC_3.0)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libelf.so.1(ELFUTILS_1.0)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libdw.so.1(ELFUTILS_0.158)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libdw.so.1(ELFUTILS_0.130)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libdw.so.1(ELFUTILS_0.122)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libcryptsetup.so.12(CRYPTSETUP_2.0)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libblkid.so.1(BLKID_2.18)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libblkid.so.1(BLKID_2.17)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libblkid.so.1(BLKID_2.15)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libacl.so.1(ACL_1.0)(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: gawk for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: diffutils for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: dbus for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: coreutils for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: acl for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: /usr/bin/getent for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libz.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libselinux.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libqrencode.so.3()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libpam.so.0()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libmount.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: liblzma.so.5()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: liblz4.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libkmod.so.2()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libgcrypt.so.11()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libgcc_s.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libelf.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libdw.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libcurl.so.4()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libcryptsetup.so.12()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libbz2.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libblkid.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libaudit.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Processing Dependency: libacl.so.1()(64bit) for package: systemd-219-73.el7.1.x86_64
+--> Running transaction check
+---> Package acl.x86_64 0:2.2.51-15.el7 will be installed
+--> Processing Dependency: libattr.so.1()(64bit) for package: acl-2.2.51-15.el7.x86_64
+---> Package audit-libs.x86_64 0:2.8.5-4.el7 will be installed
+--> Processing Dependency: libcap-ng.so.0()(64bit) for package: audit-libs-2.8.5-4.el7.x86_64
+---> Package bash.x86_64 0:4.2.46-34.el7 will be installed
+--> Processing Dependency: libtinfo.so.5()(64bit) for package: bash-4.2.46-34.el7.x86_64
+---> Package bzip2-libs.x86_64 0:1.0.6-13.el7 will be installed
+---> Package centos-release.x86_64 0:7-8.2003.0.el7.centos will be installed
+---> Package coreutils.x86_64 0:8.22-24.el7 will be installed
+--> Processing Dependency: ncurses for package: coreutils-8.22-24.el7.x86_64
+--> Processing Dependency: libcrypto.so.10(libcrypto.so.10)(64bit) for package: coreutils-8.22-24.el7.x86_64
+--> Processing Dependency: grep for package: coreutils-8.22-24.el7.x86_64
+--> Processing Dependency: gmp for package: coreutils-8.22-24.el7.x86_64
+--> Processing Dependency: /sbin/install-info for package: coreutils-8.22-24.el7.x86_64
+--> Processing Dependency: /sbin/install-info for package: coreutils-8.22-24.el7.x86_64
+--> Processing Dependency: libgmp.so.10()(64bit) for package: coreutils-8.22-24.el7.x86_64
+--> Processing Dependency: libcrypto.so.10()(64bit) for package: coreutils-8.22-24.el7.x86_64
+---> Package cryptsetup-libs.x86_64 0:2.0.3-6.el7 will be installed
+--> Processing Dependency: libuuid.so.1(UUID_1.0)(64bit) for package: cryptsetup-libs-2.0.3-6.el7.x86_64
+--> Processing Dependency: libdevmapper.so.1.02(DM_1_02_97)(64bit) for package: cryptsetup-libs-2.0.3-6.el7.x86_64
+--> Processing Dependency: libdevmapper.so.1.02(Base)(64bit) for package: cryptsetup-libs-2.0.3-6.el7.x86_64
+--> Processing Dependency: libuuid.so.1()(64bit) for package: cryptsetup-libs-2.0.3-6.el7.x86_64
+--> Processing Dependency: libjson-c.so.2()(64bit) for package: cryptsetup-libs-2.0.3-6.el7.x86_64
+--> Processing Dependency: libgpg-error.so.0()(64bit) for package: cryptsetup-libs-2.0.3-6.el7.x86_64
+--> Processing Dependency: libdevmapper.so.1.02()(64bit) for package: cryptsetup-libs-2.0.3-6.el7.x86_64
+---> Package dbus.x86_64 1:1.10.24-13.el7_6 will be installed
+--> Processing Dependency: dbus-libs(x86-64) = 1:1.10.24-13.el7_6 for package: 1:dbus-1.10.24-13.el7_6.x86_64
+--> Processing Dependency: libdbus-1.so.3(LIBDBUS_PRIVATE_1.10.24)(64bit) for package: 1:dbus-1.10.24-13.el7_6.x86_64
+--> Processing Dependency: libdbus-1.so.3(LIBDBUS_1_3)(64bit) for package: 1:dbus-1.10.24-13.el7_6.x86_64
+--> Processing Dependency: libexpat.so.1()(64bit) for package: 1:dbus-1.10.24-13.el7_6.x86_64
+--> Processing Dependency: libdbus-1.so.3()(64bit) for package: 1:dbus-1.10.24-13.el7_6.x86_64
+---> Package diffutils.x86_64 0:3.3-5.el7 will be installed
+---> Package elfutils-libelf.x86_64 0:0.176-4.el7 will be installed
+---> Package elfutils-libs.x86_64 0:0.176-4.el7 will be installed
+--> Processing Dependency: default-yama-scope for package: elfutils-libs-0.176-4.el7.x86_64
+---> Package gawk.x86_64 0:4.0.2-4.el7_3.1 will be installed
+---> Package glibc.x86_64 0:2.17-307.el7.1 will be installed
+--> Processing Dependency: basesystem for package: glibc-2.17-307.el7.1.x86_64
+---> Package glibc-common.x86_64 0:2.17-307.el7.1 will be installed
+--> Processing Dependency: tzdata >= 2003a for package: glibc-common-2.17-307.el7.1.x86_64
+---> Package kmod.x86_64 0:20-28.el7 will be installed
+--> Processing Dependency: dracut for package: kmod-20-28.el7.x86_64
+--> Processing Dependency: /usr/bin/xz for package: kmod-20-28.el7.x86_64
+--> Processing Dependency: /usr/bin/nm for package: kmod-20-28.el7.x86_64
+--> Processing Dependency: /usr/bin/gzip for package: kmod-20-28.el7.x86_64
+--> Processing Dependency: /usr/bin/cpio for package: kmod-20-28.el7.x86_64
+---> Package kmod-libs.x86_64 0:20-28.el7 will be installed
+---> Package libacl.x86_64 0:2.2.51-15.el7 will be installed
+---> Package libblkid.x86_64 0:2.23.2-63.el7 will be installed
+---> Package libcap.x86_64 0:2.22-11.el7 will be installed
+---> Package libcurl.x86_64 0:7.29.0-57.el7 will be installed
+--> Processing Dependency: nss-pem(x86-64) >= 1.0.3-5 for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libssh2(x86-64) >= 1.8.0 for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libssl3.so(NSS_3.4)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libssl3.so(NSS_3.2)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libssl3.so(NSS_3.14)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libssl3.so(NSS_3.11.4)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.9.3)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.9.2)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.5)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.4)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.34)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.3)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.2)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.12.5)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.12.1)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so(NSS_3.10)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libidn.so.11(LIBIDN_1.0)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libgssapi_krb5.so.2(gssapi_krb5_2_MIT)(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libssl3.so()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libssh2.so.1()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libsmime3.so()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libplds4.so()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libplc4.so()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnssutil3.so()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnss3.so()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libnspr4.so()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libldap-2.4.so.2()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: liblber-2.4.so.2()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libkrb5.so.3()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libk5crypto.so.3()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libidn.so.11()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libgssapi_krb5.so.2()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+--> Processing Dependency: libcom_err.so.2()(64bit) for package: libcurl-7.29.0-57.el7.x86_64
+---> Package libedit.x86_64 0:3.0-12.20121213cvs.el7 will be installed
+---> Package libgcc.x86_64 0:4.8.5-39.el7 will be installed
+---> Package libgcrypt.x86_64 0:1.5.3-14.el7 will be installed
+---> Package libmount.x86_64 0:2.23.2-63.el7 will be installed
+---> Package libnetfilter_conntrack.x86_64 0:1.0.6-1.el7_3 will be installed
+--> Processing Dependency: libmnl.so.0(LIBMNL_1.1)(64bit) for package: libnetfilter_conntrack-1.0.6-1.el7_3.x86_64
+--> Processing Dependency: libmnl.so.0(LIBMNL_1.0)(64bit) for package: libnetfilter_conntrack-1.0.6-1.el7_3.x86_64
+--> Processing Dependency: libmnl.so.0()(64bit) for package: libnetfilter_conntrack-1.0.6-1.el7_3.x86_64
+---> Package libnfnetlink.x86_64 0:1.0.1-4.el7 will be installed
+---> Package libseccomp.x86_64 0:2.3.1-4.el7 will be installed
+---> Package libselinux.x86_64 0:2.5-15.el7 will be installed
+--> Processing Dependency: libsepol(x86-64) >= 2.5-10 for package: libselinux-2.5-15.el7.x86_64
+--> Processing Dependency: pcre for package: libselinux-2.5-15.el7.x86_64
+--> Processing Dependency: libsepol.so.1(LIBSEPOL_1.0)(64bit) for package: libselinux-2.5-15.el7.x86_64
+--> Processing Dependency: libsepol.so.1()(64bit) for package: libselinux-2.5-15.el7.x86_64
+--> Processing Dependency: libpcre.so.1()(64bit) for package: libselinux-2.5-15.el7.x86_64
+---> Package lz4.x86_64 0:1.7.5-3.el7 will be installed
+---> Package nss-softokn-freebl.x86_64 0:3.44.0-8.el7_7 will be installed
+---> Package pam.x86_64 0:1.1.8-23.el7 will be installed
+--> Processing Dependency: libpwquality >= 0.9.9 for package: pam-1.1.8-23.el7.x86_64
+--> Processing Dependency: cracklib-dicts >= 2.8 for package: pam-1.1.8-23.el7.x86_64
+--> Processing Dependency: libdb-5.3.so()(64bit) for package: pam-1.1.8-23.el7.x86_64
+--> Processing Dependency: libcrack.so.2()(64bit) for package: pam-1.1.8-23.el7.x86_64
+---> Package qrencode-libs.x86_64 0:3.4.1-3.el7 will be installed
+---> Package sed.x86_64 0:4.2.2-6.el7 will be installed
+---> Package shadow-utils.x86_64 2:4.6-5.el7 will be installed
+--> Processing Dependency: setup for package: 2:shadow-utils-4.6-5.el7.x86_64
+--> Processing Dependency: libsemanage.so.1(LIBSEMANAGE_1.0)(64bit) for package: 2:shadow-utils-4.6-5.el7.x86_64
+--> Processing Dependency: libsemanage.so.1()(64bit) for package: 2:shadow-utils-4.6-5.el7.x86_64
+---> Package systemd-libs.x86_64 0:219-73.el7.1 will be installed
+---> Package xz-libs.x86_64 0:5.2.2-1.el7 will be installed
+---> Package zlib.x86_64 0:1.2.7-18.el7 will be installed
+--> Running transaction check
+---> Package basesystem.noarch 0:10.0-7.el7.centos will be installed
+--> Processing Dependency: filesystem for package: basesystem-10.0-7.el7.centos.noarch
+---> Package binutils.x86_64 0:2.27-43.base.el7 will be installed
+--> Processing Dependency: /usr/sbin/alternatives for package: binutils-2.27-43.base.el7.x86_64
+--> Processing Dependency: /usr/sbin/alternatives for package: binutils-2.27-43.base.el7.x86_64
+---> Package cpio.x86_64 0:2.11-27.el7 will be installed
+---> Package cracklib.x86_64 0:2.9.0-11.el7 will be installed
+---> Package cracklib-dicts.x86_64 0:2.9.0-11.el7 will be installed
+---> Package dbus-libs.x86_64 1:1.10.24-13.el7_6 will be installed
+---> Package device-mapper-libs.x86_64 7:1.02.164-7.el7 will be installed
+--> Processing Dependency: device-mapper = 7:1.02.164-7.el7 for package: 7:device-mapper-libs-1.02.164-7.el7.x86_64
+---> Package dracut.x86_64 0:033-568.el7 will be installed
+--> Processing Dependency: util-linux >= 2.21 for package: dracut-033-568.el7.x86_64
+--> Processing Dependency: tar for package: dracut-033-568.el7.x86_64
+--> Processing Dependency: procps-ng for package: dracut-033-568.el7.x86_64
+--> Processing Dependency: kpartx for package: dracut-033-568.el7.x86_64
+--> Processing Dependency: hardlink for package: dracut-033-568.el7.x86_64
+--> Processing Dependency: findutils for package: dracut-033-568.el7.x86_64
+--> Processing Dependency: /usr/bin/pkg-config for package: dracut-033-568.el7.x86_64
+---> Package elfutils-default-yama-scope.noarch 0:0.176-4.el7 will be installed
+---> Package expat.x86_64 0:2.1.0-11.el7 will be installed
+---> Package gmp.x86_64 1:6.0.0-15.el7 will be installed
+--> Processing Dependency: libstdc++.so.6(GLIBCXX_3.4.11)(64bit) for package: 1:gmp-6.0.0-15.el7.x86_64
+--> Processing Dependency: libstdc++.so.6(GLIBCXX_3.4)(64bit) for package: 1:gmp-6.0.0-15.el7.x86_64
+--> Processing Dependency: libstdc++.so.6(CXXABI_1.3)(64bit) for package: 1:gmp-6.0.0-15.el7.x86_64
+--> Processing Dependency: libstdc++.so.6()(64bit) for package: 1:gmp-6.0.0-15.el7.x86_64
+---> Package grep.x86_64 0:2.20-3.el7 will be installed
+---> Package gzip.x86_64 0:1.5-10.el7 will be installed
+---> Package info.x86_64 0:5.1-5.el7 will be installed
+---> Package json-c.x86_64 0:0.11-4.el7_0 will be installed
+---> Package krb5-libs.x86_64 0:1.15.1-46.el7 will be installed
+--> Processing Dependency: keyutils-libs >= 1.5.8 for package: krb5-libs-1.15.1-46.el7.x86_64
+--> Processing Dependency: libkeyutils.so.1(KEYUTILS_1.5)(64bit) for package: krb5-libs-1.15.1-46.el7.x86_64
+--> Processing Dependency: libkeyutils.so.1(KEYUTILS_1.0)(64bit) for package: krb5-libs-1.15.1-46.el7.x86_64
+--> Processing Dependency: libkeyutils.so.1(KEYUTILS_0.3)(64bit) for package: krb5-libs-1.15.1-46.el7.x86_64
+--> Processing Dependency: libverto.so.1()(64bit) for package: krb5-libs-1.15.1-46.el7.x86_64
+--> Processing Dependency: libkeyutils.so.1()(64bit) for package: krb5-libs-1.15.1-46.el7.x86_64
+---> Package libattr.x86_64 0:2.4.46-13.el7 will be installed
+---> Package libcap-ng.x86_64 0:0.7.5-4.el7 will be installed
+---> Package libcom_err.x86_64 0:1.42.9-17.el7 will be installed
+---> Package libdb.x86_64 0:5.3.21-25.el7 will be installed
+---> Package libgpg-error.x86_64 0:1.12-3.el7 will be installed
+---> Package libidn.x86_64 0:1.28-4.el7 will be installed
+---> Package libmnl.x86_64 0:1.0.3-7.el7 will be installed
+---> Package libpwquality.x86_64 0:1.2.3-5.el7 will be installed
+---> Package libsemanage.x86_64 0:2.5-14.el7 will be installed
+--> Processing Dependency: libustr-1.0.so.1(USTR_1.0.1)(64bit) for package: libsemanage-2.5-14.el7.x86_64
+--> Processing Dependency: libustr-1.0.so.1(USTR_1.0)(64bit) for package: libsemanage-2.5-14.el7.x86_64
+--> Processing Dependency: libustr-1.0.so.1()(64bit) for package: libsemanage-2.5-14.el7.x86_64
+---> Package libsepol.x86_64 0:2.5-10.el7 will be installed
+---> Package libssh2.x86_64 0:1.8.0-3.el7 will be installed
+---> Package libuuid.x86_64 0:2.23.2-63.el7 will be installed
+---> Package ncurses.x86_64 0:5.9-14.20130511.el7_4 will be installed
+---> Package ncurses-libs.x86_64 0:5.9-14.20130511.el7_4 will be installed
+--> Processing Dependency: ncurses-base = 5.9-14.20130511.el7_4 for package: ncurses-libs-5.9-14.20130511.el7_4.x86_64
+---> Package nspr.x86_64 0:4.21.0-1.el7 will be installed
+---> Package nss.x86_64 0:3.44.0-7.el7_7 will be installed
+--> Processing Dependency: nss-softokn(x86-64) >= 3.44.0-1 for package: nss-3.44.0-7.el7_7.x86_64
+--> Processing Dependency: nss-system-init for package: nss-3.44.0-7.el7_7.x86_64
+---> Package nss-pem.x86_64 0:1.0.3-7.el7 will be installed
+---> Package nss-util.x86_64 0:3.44.0-4.el7_7 will be installed
+---> Package openldap.x86_64 0:2.4.44-21.el7_6 will be installed
+--> Processing Dependency: rpm for package: openldap-2.4.44-21.el7_6.x86_64
+--> Processing Dependency: nss-tools for package: openldap-2.4.44-21.el7_6.x86_64
+--> Processing Dependency: libsasl2.so.3()(64bit) for package: openldap-2.4.44-21.el7_6.x86_64
+---> Package openssl-libs.x86_64 1:1.0.2k-19.el7 will be installed
+--> Processing Dependency: ca-certificates >= 2008-5 for package: 1:openssl-libs-1.0.2k-19.el7.x86_64
+---> Package pcre.x86_64 0:8.32-17.el7 will be installed
+---> Package setup.noarch 0:2.8.71-11.el7 will be installed
+---> Package tzdata.noarch 0:2019c-1.el7 will be installed
+---> Package xz.x86_64 0:5.2.2-1.el7 will be installed
+--> Running transaction check
+---> Package ca-certificates.noarch 0:2019.2.32-76.el7_7 will be installed
+--> Processing Dependency: p11-kit-trust >= 0.23.5 for package: ca-certificates-2019.2.32-76.el7_7.noarch
+--> Processing Dependency: p11-kit >= 0.23.5 for package: ca-certificates-2019.2.32-76.el7_7.noarch
+---> Package chkconfig.x86_64 0:1.7.4-1.el7 will be installed
+--> Processing Dependency: libpopt.so.0(LIBPOPT_0)(64bit) for package: chkconfig-1.7.4-1.el7.x86_64
+--> Processing Dependency: libpopt.so.0()(64bit) for package: chkconfig-1.7.4-1.el7.x86_64
+---> Package cyrus-sasl-lib.x86_64 0:2.1.26-23.el7 will be installed
+---> Package device-mapper.x86_64 7:1.02.164-7.el7 will be installed
+---> Package filesystem.x86_64 0:3.2-25.el7 will be installed
+---> Package findutils.x86_64 1:4.5.11-6.el7 will be installed
+---> Package hardlink.x86_64 1:1.0-19.el7 will be installed
+---> Package keyutils-libs.x86_64 0:1.5.8-3.el7 will be installed
+---> Package kpartx.x86_64 0:0.4.9-131.el7 will be installed
+---> Package libstdc++.x86_64 0:4.8.5-39.el7 will be installed
+---> Package libverto.x86_64 0:0.2.5-4.el7 will be installed
+---> Package ncurses-base.noarch 0:5.9-14.20130511.el7_4 will be installed
+---> Package nss-softokn.x86_64 0:3.44.0-8.el7_7 will be installed
+--> Processing Dependency: libsqlite3.so.0()(64bit) for package: nss-softokn-3.44.0-8.el7_7.x86_64
+---> Package nss-sysinit.x86_64 0:3.44.0-7.el7_7 will be installed
+---> Package nss-tools.x86_64 0:3.44.0-7.el7_7 will be installed
+---> Package pkgconfig.x86_64 1:0.27.1-4.el7 will be installed
+--> Processing Dependency: libglib-2.0.so.0()(64bit) for package: 1:pkgconfig-0.27.1-4.el7.x86_64
+---> Package procps-ng.x86_64 0:3.3.10-27.el7 will be installed
+---> Package rpm.x86_64 0:4.11.3-43.el7 will be installed
+--> Processing Dependency: curl for package: rpm-4.11.3-43.el7.x86_64
+--> Processing Dependency: /usr/bin/db_stat for package: rpm-4.11.3-43.el7.x86_64
+--> Processing Dependency: librpmio.so.3()(64bit) for package: rpm-4.11.3-43.el7.x86_64
+--> Processing Dependency: librpm.so.3()(64bit) for package: rpm-4.11.3-43.el7.x86_64
+--> Processing Dependency: liblua-5.1.so()(64bit) for package: rpm-4.11.3-43.el7.x86_64
+---> Package tar.x86_64 2:1.26-35.el7 will be installed
+---> Package ustr.x86_64 0:1.0.4-16.el7 will be installed
+---> Package util-linux.x86_64 0:2.23.2-63.el7 will be installed
+--> Processing Dependency: libsmartcols = 2.23.2-63.el7 for package: util-linux-2.23.2-63.el7.x86_64
+--> Processing Dependency: libutempter.so.0(UTEMPTER_1.1)(64bit) for package: util-linux-2.23.2-63.el7.x86_64
+--> Processing Dependency: libsmartcols.so.1(SMARTCOLS_2.25)(64bit) for package: util-linux-2.23.2-63.el7.x86_64
+--> Processing Dependency: libutempter.so.0()(64bit) for package: util-linux-2.23.2-63.el7.x86_64
+--> Processing Dependency: libuser.so.1()(64bit) for package: util-linux-2.23.2-63.el7.x86_64
+--> Processing Dependency: libsmartcols.so.1()(64bit) for package: util-linux-2.23.2-63.el7.x86_64
+--> Running transaction check
+---> Package curl.x86_64 0:7.29.0-57.el7 will be installed
+---> Package glib2.x86_64 0:2.56.1-5.el7 will be installed
+--> Processing Dependency: shared-mime-info for package: glib2-2.56.1-5.el7.x86_64
+--> Processing Dependency: libffi.so.6()(64bit) for package: glib2-2.56.1-5.el7.x86_64
+---> Package libdb-utils.x86_64 0:5.3.21-25.el7 will be installed
+---> Package libsmartcols.x86_64 0:2.23.2-63.el7 will be installed
+---> Package libuser.x86_64 0:0.60-9.el7 will be installed
+---> Package libutempter.x86_64 0:1.1.6-4.el7 will be installed
+---> Package lua.x86_64 0:5.1.4-15.el7 will be installed
+--> Processing Dependency: libreadline.so.6()(64bit) for package: lua-5.1.4-15.el7.x86_64
+---> Package p11-kit.x86_64 0:0.23.5-3.el7 will be installed
+---> Package p11-kit-trust.x86_64 0:0.23.5-3.el7 will be installed
+--> Processing Dependency: libtasn1.so.6(LIBTASN1_0_3)(64bit) for package: p11-kit-trust-0.23.5-3.el7.x86_64
+--> Processing Dependency: libtasn1.so.6()(64bit) for package: p11-kit-trust-0.23.5-3.el7.x86_64
+---> Package popt.x86_64 0:1.13-16.el7 will be installed
+---> Package rpm-libs.x86_64 0:4.11.3-43.el7 will be installed
+---> Package sqlite.x86_64 0:3.7.17-8.el7_7.1 will be installed
+--> Running transaction check
+---> Package libffi.x86_64 0:3.0.13-19.el7 will be installed
+---> Package libtasn1.x86_64 0:4.10-1.el7 will be installed
+---> Package readline.x86_64 0:6.2-11.el7 will be installed
+---> Package shared-mime-info.x86_64 0:1.8-5.el7 will be installed
+--> Processing Dependency: libxml2.so.2(LIBXML2_2.4.30)(64bit) for package: shared-mime-info-1.8-5.el7.x86_64
+--> Processing Dependency: libxml2.so.2()(64bit) for package: shared-mime-info-1.8-5.el7.x86_64
+--> Running transaction check
+---> Package libxml2.x86_64 0:2.9.1-6.el7.4 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package                       Arch     Version                    Repository
+                                                                           Size
+================================================================================
+Installing:
+ chrony                        x86_64   3.4-1.el7                  base   251 k
+ iptables                      x86_64   1.4.21-34.el7              base   432 k
+ systemd                       x86_64   219-73.el7.1               base   5.1 M
+Installing for dependencies:
+ acl                           x86_64   2.2.51-15.el7              base    81 k
+ audit-libs                    x86_64   2.8.5-4.el7                base   102 k
+ basesystem                    noarch   10.0-7.el7.centos          base   5.0 k
+ bash                          x86_64   4.2.46-34.el7              base   1.0 M
+ binutils                      x86_64   2.27-43.base.el7           base   5.9 M
+ bzip2-libs                    x86_64   1.0.6-13.el7               base    40 k
+ ca-certificates               noarch   2019.2.32-76.el7_7         base   399 k
+ centos-release                x86_64   7-8.2003.0.el7.centos      base    26 k
+ chkconfig                     x86_64   1.7.4-1.el7                base   181 k
+ coreutils                     x86_64   8.22-24.el7                base   3.3 M
+ cpio                          x86_64   2.11-27.el7                base   211 k
+ cracklib                      x86_64   2.9.0-11.el7               base    80 k
+ cracklib-dicts                x86_64   2.9.0-11.el7               base   3.6 M
+ cryptsetup-libs               x86_64   2.0.3-6.el7                base   339 k
+ curl                          x86_64   7.29.0-57.el7              base   270 k
+ cyrus-sasl-lib                x86_64   2.1.26-23.el7              base   155 k
+ dbus                          x86_64   1:1.10.24-13.el7_6         base   245 k
+ dbus-libs                     x86_64   1:1.10.24-13.el7_6         base   169 k
+ device-mapper                 x86_64   7:1.02.164-7.el7           base   295 k
+ device-mapper-libs            x86_64   7:1.02.164-7.el7           base   324 k
+ diffutils                     x86_64   3.3-5.el7                  base   322 k
+ dracut                        x86_64   033-568.el7                base   329 k
+ elfutils-default-yama-scope   noarch   0.176-4.el7                base    33 k
+ elfutils-libelf               x86_64   0.176-4.el7                base   195 k
+ elfutils-libs                 x86_64   0.176-4.el7                base   291 k
+ expat                         x86_64   2.1.0-11.el7               base    81 k
+ filesystem                    x86_64   3.2-25.el7                 base   1.0 M
+ findutils                     x86_64   1:4.5.11-6.el7             base   559 k
+ gawk                          x86_64   4.0.2-4.el7_3.1            base   874 k
+ glib2                         x86_64   2.56.1-5.el7               base   2.5 M
+ glibc                         x86_64   2.17-307.el7.1             base   3.6 M
+ glibc-common                  x86_64   2.17-307.el7.1             base    11 M
+ gmp                           x86_64   1:6.0.0-15.el7             base   281 k
+ grep                          x86_64   2.20-3.el7                 base   344 k
+ gzip                          x86_64   1.5-10.el7                 base   130 k
+ hardlink                      x86_64   1:1.0-19.el7               base    14 k
+ info                          x86_64   5.1-5.el7                  base   233 k
+ json-c                        x86_64   0.11-4.el7_0               base    31 k
+ keyutils-libs                 x86_64   1.5.8-3.el7                base    25 k
+ kmod                          x86_64   20-28.el7                  base   123 k
+ kmod-libs                     x86_64   20-28.el7                  base    51 k
+ kpartx                        x86_64   0.4.9-131.el7              base    80 k
+ krb5-libs                     x86_64   1.15.1-46.el7              base   809 k
+ libacl                        x86_64   2.2.51-15.el7              base    27 k
+ libattr                       x86_64   2.4.46-13.el7              base    18 k
+ libblkid                      x86_64   2.23.2-63.el7              base   182 k
+ libcap                        x86_64   2.22-11.el7                base    47 k
+ libcap-ng                     x86_64   0.7.5-4.el7                base    25 k
+ libcom_err                    x86_64   1.42.9-17.el7              base    42 k
+ libcurl                       x86_64   7.29.0-57.el7              base   223 k
+ libdb                         x86_64   5.3.21-25.el7              base   720 k
+ libdb-utils                   x86_64   5.3.21-25.el7              base   132 k
+ libedit                       x86_64   3.0-12.20121213cvs.el7     base    92 k
+ libffi                        x86_64   3.0.13-19.el7              base    30 k
+ libgcc                        x86_64   4.8.5-39.el7               base   102 k
+ libgcrypt                     x86_64   1.5.3-14.el7               base   263 k
+ libgpg-error                  x86_64   1.12-3.el7                 base    87 k
+ libidn                        x86_64   1.28-4.el7                 base   209 k
+ libmnl                        x86_64   1.0.3-7.el7                base    23 k
+ libmount                      x86_64   2.23.2-63.el7              base   184 k
+ libnetfilter_conntrack        x86_64   1.0.6-1.el7_3              base    55 k
+ libnfnetlink                  x86_64   1.0.1-4.el7                base    26 k
+ libpwquality                  x86_64   1.2.3-5.el7                base    85 k
+ libseccomp                    x86_64   2.3.1-4.el7                base    56 k
+ libselinux                    x86_64   2.5-15.el7                 base   162 k
+ libsemanage                   x86_64   2.5-14.el7                 base   151 k
+ libsepol                      x86_64   2.5-10.el7                 base   297 k
+ libsmartcols                  x86_64   2.23.2-63.el7              base   142 k
+ libssh2                       x86_64   1.8.0-3.el7                base    88 k
+ libstdc++                     x86_64   4.8.5-39.el7               base   305 k
+ libtasn1                      x86_64   4.10-1.el7                 base   320 k
+ libuser                       x86_64   0.60-9.el7                 base   400 k
+ libutempter                   x86_64   1.1.6-4.el7                base    25 k
+ libuuid                       x86_64   2.23.2-63.el7              base    83 k
+ libverto                      x86_64   0.2.5-4.el7                base    16 k
+ libxml2                       x86_64   2.9.1-6.el7.4              base   668 k
+ lua                           x86_64   5.1.4-15.el7               base   201 k
+ lz4                           x86_64   1.7.5-3.el7                base    99 k
+ ncurses                       x86_64   5.9-14.20130511.el7_4      base   304 k
+ ncurses-base                  noarch   5.9-14.20130511.el7_4      base    68 k
+ ncurses-libs                  x86_64   5.9-14.20130511.el7_4      base   316 k
+ nspr                          x86_64   4.21.0-1.el7               base   127 k
+ nss                           x86_64   3.44.0-7.el7_7             base   854 k
+ nss-pem                       x86_64   1.0.3-7.el7                base    74 k
+ nss-softokn                   x86_64   3.44.0-8.el7_7             base   330 k
+ nss-softokn-freebl            x86_64   3.44.0-8.el7_7             base   224 k
+ nss-sysinit                   x86_64   3.44.0-7.el7_7             base    65 k
+ nss-tools                     x86_64   3.44.0-7.el7_7             base   528 k
+ nss-util                      x86_64   3.44.0-4.el7_7             base    79 k
+ openldap                      x86_64   2.4.44-21.el7_6            base   356 k
+ openssl-libs                  x86_64   1:1.0.2k-19.el7            base   1.2 M
+ p11-kit                       x86_64   0.23.5-3.el7               base   252 k
+ p11-kit-trust                 x86_64   0.23.5-3.el7               base   129 k
+ pam                           x86_64   1.1.8-23.el7               base   721 k
+ pcre                          x86_64   8.32-17.el7                base   422 k
+ pkgconfig                     x86_64   1:0.27.1-4.el7             base    54 k
+ popt                          x86_64   1.13-16.el7                base    42 k
+ procps-ng                     x86_64   3.3.10-27.el7              base   291 k
+ qrencode-libs                 x86_64   3.4.1-3.el7                base    50 k
+ readline                      x86_64   6.2-11.el7                 base   193 k
+ rpm                           x86_64   4.11.3-43.el7              base   1.2 M
+ rpm-libs                      x86_64   4.11.3-43.el7              base   278 k
+ sed                           x86_64   4.2.2-6.el7                base   231 k
+ setup                         noarch   2.8.71-11.el7              base   166 k
+ shadow-utils                  x86_64   2:4.6-5.el7                base   1.2 M
+ shared-mime-info              x86_64   1.8-5.el7                  base   312 k
+ sqlite                        x86_64   3.7.17-8.el7_7.1           base   394 k
+ systemd-libs                  x86_64   219-73.el7.1               base   415 k
+ tar                           x86_64   2:1.26-35.el7              base   846 k
+ tzdata                        noarch   2019c-1.el7                base   493 k
+ ustr                          x86_64   1.0.4-16.el7               base    92 k
+ util-linux                    x86_64   2.23.2-63.el7              base   2.0 M
+ xz                            x86_64   5.2.2-1.el7                base   229 k
+ xz-libs                       x86_64   5.2.2-1.el7                base   103 k
+ zlib                          x86_64   1.2.7-18.el7               base    90 k
+
+Transaction Summary
+================================================================================
+Install  3 Packages (+115 Dependent packages)
+
+Total download size: 66 M
+Installed size: 396 M
+Downloading packages:
+warning: /rootfs/var/cache/dnf/base/packages/basesystem-10.0-7.el7.centos.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+Public key for basesystem-10.0-7.el7.centos.noarch.rpm is not installed
+--------------------------------------------------------------------------------
+Total                                              6.8 MB/s |  66 MB  00:09     
+Retrieving key from file:///osbuilder/centos/RPM-GPG-KEY-CentOS-7
+Importing GPG key 0xF4A80EB5:
+ Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+ Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+ From       : /osbuilder/centos/RPM-GPG-KEY-CentOS-7
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libgcc-4.8.5-39.el7.x86_64                                 1/118 
+  Installing : centos-release-7-8.2003.0.el7.centos.x86_64                2/118 
+  Installing : setup-2.8.71-11.el7.noarch                                 3/118 
+  Installing : filesystem-3.2-25.el7.x86_64                               4/118 
+  Installing : basesystem-10.0-7.el7.centos.noarch                        5/118 
+  Installing : ncurses-base-5.9-14.20130511.el7_4.noarch                  6/118 
+  Installing : tzdata-2019c-1.el7.noarch                                  7/118 
+  Installing : nss-softokn-freebl-3.44.0-8.el7_7.x86_64                   8/118 
+  Installing : glibc-common-2.17-307.el7.1.x86_64                         9/118 
+  Installing : glibc-2.17-307.el7.1.x86_64                               10/118 
+  Installing : nspr-4.21.0-1.el7.x86_64                                  11/118 
+  Installing : nss-util-3.44.0-4.el7_7.x86_64                            12/118 
+  Installing : libstdc++-4.8.5-39.el7.x86_64                             13/118 
+  Installing : ncurses-libs-5.9-14.20130511.el7_4.x86_64                 14/118 
+  Installing : bash-4.2.46-34.el7.x86_64                                 15/118 
+  Installing : libsepol-2.5-10.el7.x86_64                                16/118 
+  Installing : pcre-8.32-17.el7.x86_64                                   17/118 
+  Installing : libselinux-2.5-15.el7.x86_64                              18/118 
+  Installing : zlib-1.2.7-18.el7.x86_64                                  19/118 
+  Installing : info-5.1-5.el7.x86_64                                     20/118 
+  Installing : xz-libs-5.2.2-1.el7.x86_64                                21/118 
+  Installing : bzip2-libs-1.0.6-13.el7.x86_64                            22/118 
+  Installing : libattr-2.4.46-13.el7.x86_64                              23/118 
+  Installing : libacl-2.2.51-15.el7.x86_64                               24/118 
+  Installing : libcap-2.22-11.el7.x86_64                                 25/118 
+  Installing : libdb-5.3.21-25.el7.x86_64                                26/118 
+  Installing : sed-4.2.2-6.el7.x86_64                                    27/118 
+  Installing : elfutils-libelf-0.176-4.el7.x86_64                        28/118 
+  Installing : popt-1.13-16.el7.x86_64                                   29/118 
+  Installing : libcom_err-1.42.9-17.el7.x86_64                           30/118 
+  Installing : libuuid-2.23.2-63.el7.x86_64                              31/118 
+  Installing : chkconfig-1.7.4-1.el7.x86_64                              32/118 
+  Installing : grep-2.20-3.el7.x86_64                                    33/118 
+  Installing : libgpg-error-1.12-3.el7.x86_64                            34/118 
+  Installing : libgcrypt-1.5.3-14.el7.x86_64                             35/118 
+  Installing : libcap-ng-0.7.5-4.el7.x86_64                              36/118 
+  Installing : audit-libs-2.8.5-4.el7.x86_64                             37/118 
+  Installing : libffi-3.0.13-19.el7.x86_64                               38/118 
+  Installing : p11-kit-0.23.5-3.el7.x86_64                               39/118 
+  Installing : xz-5.2.2-1.el7.x86_64                                     40/118 
+  Installing : readline-6.2-11.el7.x86_64                                41/118 
+  Installing : lua-5.1.4-15.el7.x86_64                                   42/118 
+  Installing : cpio-2.11-27.el7.x86_64                                   43/118 
+  Installing : gawk-4.0.2-4.el7_3.1.x86_64                               44/118 
+  Installing : diffutils-3.3-5.el7.x86_64                                45/118 
+  Installing : 1:findutils-4.5.11-6.el7.x86_64                           46/118 
+  Installing : lz4-1.7.5-3.el7.x86_64                                    47/118 
+  Installing : libnfnetlink-1.0.1-4.el7.x86_64                           48/118 
+  Installing : sqlite-3.7.17-8.el7_7.1.x86_64                            49/118 
+  Installing : nss-softokn-3.44.0-8.el7_7.x86_64                         50/118 
+  Installing : libdb-utils-5.3.21-25.el7.x86_64                          51/118 
+  Installing : acl-2.2.51-15.el7.x86_64                                  52/118 
+  Installing : 2:tar-1.26-35.el7.x86_64                                  53/118 
+  Installing : kmod-libs-20-28.el7.x86_64                                54/118 
+  Installing : libxml2-2.9.1-6.el7.4.x86_64                              55/118 
+  Installing : libidn-1.28-4.el7.x86_64                                  56/118 
+  Installing : libedit-3.0-12.20121213cvs.el7.x86_64                     57/118 
+  Installing : ncurses-5.9-14.20130511.el7_4.x86_64                      58/118 
+  Installing : 1:gmp-6.0.0-15.el7.x86_64                                 59/118 
+  Installing : libsmartcols-2.23.2-63.el7.x86_64                         60/118 
+  Installing : ustr-1.0.4-16.el7.x86_64                                  61/118 
+  Installing : libsemanage-2.5-14.el7.x86_64                             62/118 
+  Installing : libverto-0.2.5-4.el7.x86_64                               63/118 
+  Installing : libtasn1-4.10-1.el7.x86_64                                64/118 
+  Installing : p11-kit-trust-0.23.5-3.el7.x86_64                         65/118 
+  Installing : ca-certificates-2019.2.32-76.el7_7.noarch                 66/118 
+  Installing : 1:hardlink-1.0-19.el7.x86_64                              67/118 
+  Installing : libmnl-1.0.3-7.el7.x86_64                                 68/118 
+  Installing : libnetfilter_conntrack-1.0.6-1.el7_3.x86_64               69/118 
+  Installing : qrencode-libs-3.4.1-3.el7.x86_64                          70/118 
+  Installing : keyutils-libs-1.5.8-3.el7.x86_64                          71/118 
+  Installing : coreutils-8.22-24.el7.x86_64                              72/118 
+  Installing : krb5-libs-1.15.1-46.el7.x86_64                            73/118 
+  Installing : 1:openssl-libs-1.0.2k-19.el7.x86_64                       74/118 
+  Installing : 2:shadow-utils-4.6-5.el7.x86_64                           75/118 
+  Installing : libblkid-2.23.2-63.el7.x86_64                             76/118 
+  Installing : libmount-2.23.2-63.el7.x86_64                             77/118 
+  Installing : glib2-2.56.1-5.el7.x86_64                                 78/118 
+  Installing : shared-mime-info-1.8-5.el7.x86_64                         79/118 
+  Installing : gzip-1.5-10.el7.x86_64                                    80/118 
+  Installing : cracklib-2.9.0-11.el7.x86_64                              81/118 
+  Installing : cracklib-dicts-2.9.0-11.el7.x86_64                        82/118 
+  Installing : pam-1.1.8-23.el7.x86_64                                   83/118 
+  Installing : libpwquality-1.2.3-5.el7.x86_64                           84/118 
+  Installing : 1:pkgconfig-0.27.1-4.el7.x86_64                           85/118 
+  Installing : libutempter-1.1.6-4.el7.x86_64                            86/118 
+  Installing : libssh2-1.8.0-3.el7.x86_64                                87/118 
+  Installing : cyrus-sasl-lib-2.1.26-23.el7.x86_64                       88/118 
+  Installing : nss-pem-1.0.3-7.el7.x86_64                                89/118 
+  Installing : nss-3.44.0-7.el7_7.x86_64                                 90/118 
+  Installing : nss-sysinit-3.44.0-7.el7_7.x86_64                         91/118 
+  Installing : nss-tools-3.44.0-7.el7_7.x86_64                           92/118 
+  Installing : libcurl-7.29.0-57.el7.x86_64                              93/118 
+  Installing : curl-7.29.0-57.el7.x86_64                                 94/118 
+  Installing : rpm-libs-4.11.3-43.el7.x86_64                             95/118 
+  Installing : rpm-4.11.3-43.el7.x86_64                                  96/118 
+  Installing : openldap-2.4.44-21.el7_6.x86_64                           97/118 
+  Installing : libuser-0.60-9.el7.x86_64                                 98/118 
+  Installing : binutils-2.27-43.base.el7.x86_64                          99/118 
+  Installing : libseccomp-2.3.1-4.el7.x86_64                            100/118 
+  Installing : json-c-0.11-4.el7_0.x86_64                               101/118 
+  Installing : expat-2.1.0-11.el7.x86_64                                102/118 
+  Installing : util-linux-2.23.2-63.el7.x86_64                          103/118 
+  Installing : procps-ng-3.3.10-27.el7.x86_64                           104/118 
+  Installing : kpartx-0.4.9-131.el7.x86_64                              105/118 
+  Installing : 7:device-mapper-1.02.164-7.el7.x86_64                    106/118 
+  Installing : 7:device-mapper-libs-1.02.164-7.el7.x86_64               107/118 
+  Installing : cryptsetup-libs-2.0.3-6.el7.x86_64                       108/118 
+  Installing : dracut-033-568.el7.x86_64                                109/118 
+  Installing : kmod-20-28.el7.x86_64                                    110/118 
+  Installing : elfutils-libs-0.176-4.el7.x86_64                         111/118 
+  Installing : systemd-libs-219-73.el7.1.x86_64                         112/118 
+  Installing : 1:dbus-libs-1.10.24-13.el7_6.x86_64                      113/118 
+  Installing : systemd-219-73.el7.1.x86_64                              114/118 
+Failed to get D-Bus connection: Operation not permitted
+  Installing : elfutils-default-yama-scope-0.176-4.el7.noarch           115/118 
+  Installing : 1:dbus-1.10.24-13.el7_6.x86_64                           116/118 
+  Installing : chrony-3.4-1.el7.x86_64                                  117/118 
+Failed to get D-Bus connection: Operation not permitted
+  Installing : iptables-1.4.21-34.el7.x86_64                            118/118 
+  Verifying  : tzdata-2019c-1.el7.noarch                                  1/118 
+  Verifying  : acl-2.2.51-15.el7.x86_64                                   2/118 
+  Verifying  : 1:pkgconfig-0.27.1-4.el7.x86_64                            3/118 
+  Verifying  : libacl-2.2.51-15.el7.x86_64                                4/118 
+  Verifying  : kpartx-0.4.9-131.el7.x86_64                                5/118 
+  Verifying  : centos-release-7-8.2003.0.el7.centos.x86_64                6/118 
+  Verifying  : libcap-2.22-11.el7.x86_64                                  7/118 
+  Verifying  : nss-3.44.0-7.el7_7.x86_64                                  8/118 
+  Verifying  : libssh2-1.8.0-3.el7.x86_64                                 9/118 
+  Verifying  : pcre-8.32-17.el7.x86_64                                   10/118 
+  Verifying  : libmount-2.23.2-63.el7.x86_64                             11/118 
+  Verifying  : 1:openssl-libs-1.0.2k-19.el7.x86_64                       12/118 
+  Verifying  : readline-6.2-11.el7.x86_64                                13/118 
+  Verifying  : sqlite-3.7.17-8.el7_7.1.x86_64                            14/118 
+  Verifying  : zlib-1.2.7-18.el7.x86_64                                  15/118 
+  Verifying  : util-linux-2.23.2-63.el7.x86_64                           16/118 
+  Verifying  : ca-certificates-2019.2.32-76.el7_7.noarch                 17/118 
+  Verifying  : nss-pem-1.0.3-7.el7.x86_64                                18/118 
+  Verifying  : sed-4.2.2-6.el7.x86_64                                    19/118 
+  Verifying  : lz4-1.7.5-3.el7.x86_64                                    20/118 
+  Verifying  : libselinux-2.5-15.el7.x86_64                              21/118 
+  Verifying  : libsemanage-2.5-14.el7.x86_64                             22/118 
+  Verifying  : kmod-libs-20-28.el7.x86_64                                23/118 
+  Verifying  : elfutils-libs-0.176-4.el7.x86_64                          24/118 
+  Verifying  : libnfnetlink-1.0.1-4.el7.x86_64                           25/118 
+  Verifying  : cracklib-dicts-2.9.0-11.el7.x86_64                        26/118 
+  Verifying  : rpm-4.11.3-43.el7.x86_64                                  27/118 
+  Verifying  : libedit-3.0-12.20121213cvs.el7.x86_64                     28/118 
+  Verifying  : libsmartcols-2.23.2-63.el7.x86_64                         29/118 
+  Verifying  : chkconfig-1.7.4-1.el7.x86_64                              30/118 
+  Verifying  : ustr-1.0.4-16.el7.x86_64                                  31/118 
+  Verifying  : lua-5.1.4-15.el7.x86_64                                   32/118 
+  Verifying  : libutempter-1.1.6-4.el7.x86_64                            33/118 
+  Verifying  : libidn-1.28-4.el7.x86_64                                  34/118 
+  Verifying  : setup-2.8.71-11.el7.noarch                                35/118 
+  Verifying  : filesystem-3.2-25.el7.x86_64                              36/118 
+  Verifying  : nss-tools-3.44.0-7.el7_7.x86_64                           37/118 
+  Verifying  : coreutils-8.22-24.el7.x86_64                              38/118 
+  Verifying  : pam-1.1.8-23.el7.x86_64                                   39/118 
+  Verifying  : libstdc++-4.8.5-39.el7.x86_64                             40/118 
+  Verifying  : elfutils-default-yama-scope-0.176-4.el7.noarch            41/118 
+  Verifying  : cryptsetup-libs-2.0.3-6.el7.x86_64                        42/118 
+  Verifying  : glib2-2.56.1-5.el7.x86_64                                 43/118 
+  Verifying  : basesystem-10.0-7.el7.centos.noarch                       44/118 
+  Verifying  : systemd-219-73.el7.1.x86_64                               45/118 
+  Verifying  : libverto-0.2.5-4.el7.x86_64                               46/118 
+  Verifying  : systemd-libs-219-73.el7.1.x86_64                          47/118 
+  Verifying  : info-5.1-5.el7.x86_64                                     48/118 
+  Verifying  : nss-sysinit-3.44.0-7.el7_7.x86_64                         49/118 
+  Verifying  : bzip2-libs-1.0.6-13.el7.x86_64                            50/118 
+  Verifying  : libsepol-2.5-10.el7.x86_64                                51/118 
+  Verifying  : elfutils-libelf-0.176-4.el7.x86_64                        52/118 
+  Verifying  : libxml2-2.9.1-6.el7.4.x86_64                              53/118 
+  Verifying  : rpm-libs-4.11.3-43.el7.x86_64                             54/118 
+  Verifying  : libuser-0.60-9.el7.x86_64                                 55/118 
+  Verifying  : libtasn1-4.10-1.el7.x86_64                                56/118 
+  Verifying  : bash-4.2.46-34.el7.x86_64                                 57/118 
+  Verifying  : 1:hardlink-1.0-19.el7.x86_64                              58/118 
+  Verifying  : cracklib-2.9.0-11.el7.x86_64                              59/118 
+  Verifying  : libgpg-error-1.12-3.el7.x86_64                            60/118 
+  Verifying  : nspr-4.21.0-1.el7.x86_64                                  61/118 
+  Verifying  : nss-softokn-freebl-3.44.0-8.el7_7.x86_64                  62/118 
+  Verifying  : openldap-2.4.44-21.el7_6.x86_64                           63/118 
+  Verifying  : nss-softokn-3.44.0-8.el7_7.x86_64                         64/118 
+  Verifying  : libmnl-1.0.3-7.el7.x86_64                                 65/118 
+  Verifying  : popt-1.13-16.el7.x86_64                                   66/118 
+  Verifying  : gzip-1.5-10.el7.x86_64                                    67/118 
+  Verifying  : p11-kit-0.23.5-3.el7.x86_64                               68/118 
+  Verifying  : 2:shadow-utils-4.6-5.el7.x86_64                           69/118 
+  Verifying  : libcom_err-1.42.9-17.el7.x86_64                           70/118 
+  Verifying  : chrony-3.4-1.el7.x86_64                                   71/118 
+  Verifying  : cpio-2.11-27.el7.x86_64                                   72/118 
+  Verifying  : libattr-2.4.46-13.el7.x86_64                              73/118 
+  Verifying  : libcurl-7.29.0-57.el7.x86_64                              74/118 
+  Verifying  : gawk-4.0.2-4.el7_3.1.x86_64                               75/118 
+  Verifying  : audit-libs-2.8.5-4.el7.x86_64                             76/118 
+  Verifying  : procps-ng-3.3.10-27.el7.x86_64                            77/118 
+  Verifying  : iptables-1.4.21-34.el7.x86_64                             78/118 
+  Verifying  : qrencode-libs-3.4.1-3.el7.x86_64                          79/118 
+  Verifying  : glibc-common-2.17-307.el7.1.x86_64                        80/118 
+  Verifying  : kmod-20-28.el7.x86_64                                     81/118 
+  Verifying  : diffutils-3.3-5.el7.x86_64                                82/118 
+  Verifying  : libblkid-2.23.2-63.el7.x86_64                             83/118 
+  Verifying  : glibc-2.17-307.el7.1.x86_64                               84/118 
+  Verifying  : 7:device-mapper-1.02.164-7.el7.x86_64                     85/118 
+  Verifying  : libdb-5.3.21-25.el7.x86_64                                86/118 
+  Verifying  : 1:dbus-libs-1.10.24-13.el7_6.x86_64                       87/118 
+  Verifying  : 1:dbus-1.10.24-13.el7_6.x86_64                            88/118 
+  Verifying  : ncurses-libs-5.9-14.20130511.el7_4.x86_64                 89/118 
+  Verifying  : grep-2.20-3.el7.x86_64                                    90/118 
+  Verifying  : libdb-utils-5.3.21-25.el7.x86_64                          91/118 
+  Verifying  : xz-libs-5.2.2-1.el7.x86_64                                92/118 
+  Verifying  : 1:findutils-4.5.11-6.el7.x86_64                           93/118 
+  Verifying  : ncurses-5.9-14.20130511.el7_4.x86_64                      94/118 
+  Verifying  : ncurses-base-5.9-14.20130511.el7_4.noarch                 95/118 
+  Verifying  : 2:tar-1.26-35.el7.x86_64                                  96/118 
+  Verifying  : libnetfilter_conntrack-1.0.6-1.el7_3.x86_64               97/118 
+  Verifying  : keyutils-libs-1.5.8-3.el7.x86_64                          98/118 
+  Verifying  : krb5-libs-1.15.1-46.el7.x86_64                            99/118 
+  Verifying  : 7:device-mapper-libs-1.02.164-7.el7.x86_64               100/118 
+  Verifying  : curl-7.29.0-57.el7.x86_64                                101/118 
+  Verifying  : libseccomp-2.3.1-4.el7.x86_64                            102/118 
+  Verifying  : libgcc-4.8.5-39.el7.x86_64                               103/118 
+  Verifying  : shared-mime-info-1.8-5.el7.x86_64                        104/118 
+  Verifying  : json-c-0.11-4.el7_0.x86_64                               105/118 
+  Verifying  : dracut-033-568.el7.x86_64                                106/118 
+  Verifying  : xz-5.2.2-1.el7.x86_64                                    107/118 
+  Verifying  : libcap-ng-0.7.5-4.el7.x86_64                             108/118 
+  Verifying  : 1:gmp-6.0.0-15.el7.x86_64                                109/118 
+  Verifying  : binutils-2.27-43.base.el7.x86_64                         110/118 
+  Verifying  : p11-kit-trust-0.23.5-3.el7.x86_64                        111/118 
+  Verifying  : libgcrypt-1.5.3-14.el7.x86_64                            112/118 
+  Verifying  : libuuid-2.23.2-63.el7.x86_64                             113/118 
+  Verifying  : expat-2.1.0-11.el7.x86_64                                114/118 
+  Verifying  : libpwquality-1.2.3-5.el7.x86_64                          115/118 
+  Verifying  : nss-util-3.44.0-4.el7_7.x86_64                           116/118 
+  Verifying  : cyrus-sasl-lib-2.1.26-23.el7.x86_64                      117/118 
+  Verifying  : libffi-3.0.13-19.el7.x86_64                              118/118 
+
+Installed:
+  chrony.x86_64 0:3.4-1.el7             iptables.x86_64 0:1.4.21-34.el7        
+  systemd.x86_64 0:219-73.el7.1        
+
+Dependency Installed:
+  acl.x86_64 0:2.2.51-15.el7                                                    
+  audit-libs.x86_64 0:2.8.5-4.el7                                               
+  basesystem.noarch 0:10.0-7.el7.centos                                         
+  bash.x86_64 0:4.2.46-34.el7                                                   
+  binutils.x86_64 0:2.27-43.base.el7                                            
+  bzip2-libs.x86_64 0:1.0.6-13.el7                                              
+  ca-certificates.noarch 0:2019.2.32-76.el7_7                                   
+  centos-release.x86_64 0:7-8.2003.0.el7.centos                                 
+  chkconfig.x86_64 0:1.7.4-1.el7                                                
+  coreutils.x86_64 0:8.22-24.el7                                                
+  cpio.x86_64 0:2.11-27.el7                                                     
+  cracklib.x86_64 0:2.9.0-11.el7                                                
+  cracklib-dicts.x86_64 0:2.9.0-11.el7                                          
+  cryptsetup-libs.x86_64 0:2.0.3-6.el7                                          
+  curl.x86_64 0:7.29.0-57.el7                                                   
+  cyrus-sasl-lib.x86_64 0:2.1.26-23.el7                                         
+  dbus.x86_64 1:1.10.24-13.el7_6                                                
+  dbus-libs.x86_64 1:1.10.24-13.el7_6                                           
+  device-mapper.x86_64 7:1.02.164-7.el7                                         
+  device-mapper-libs.x86_64 7:1.02.164-7.el7                                    
+  diffutils.x86_64 0:3.3-5.el7                                                  
+  dracut.x86_64 0:033-568.el7                                                   
+  elfutils-default-yama-scope.noarch 0:0.176-4.el7                              
+  elfutils-libelf.x86_64 0:0.176-4.el7                                          
+  elfutils-libs.x86_64 0:0.176-4.el7                                            
+  expat.x86_64 0:2.1.0-11.el7                                                   
+  filesystem.x86_64 0:3.2-25.el7                                                
+  findutils.x86_64 1:4.5.11-6.el7                                               
+  gawk.x86_64 0:4.0.2-4.el7_3.1                                                 
+  glib2.x86_64 0:2.56.1-5.el7                                                   
+  glibc.x86_64 0:2.17-307.el7.1                                                 
+  glibc-common.x86_64 0:2.17-307.el7.1                                          
+  gmp.x86_64 1:6.0.0-15.el7                                                     
+  grep.x86_64 0:2.20-3.el7                                                      
+  gzip.x86_64 0:1.5-10.el7                                                      
+  hardlink.x86_64 1:1.0-19.el7                                                  
+  info.x86_64 0:5.1-5.el7                                                       
+  json-c.x86_64 0:0.11-4.el7_0                                                  
+  keyutils-libs.x86_64 0:1.5.8-3.el7                                            
+  kmod.x86_64 0:20-28.el7                                                       
+  kmod-libs.x86_64 0:20-28.el7                                                  
+  kpartx.x86_64 0:0.4.9-131.el7                                                 
+  krb5-libs.x86_64 0:1.15.1-46.el7                                              
+  libacl.x86_64 0:2.2.51-15.el7                                                 
+  libattr.x86_64 0:2.4.46-13.el7                                                
+  libblkid.x86_64 0:2.23.2-63.el7                                               
+  libcap.x86_64 0:2.22-11.el7                                                   
+  libcap-ng.x86_64 0:0.7.5-4.el7                                                
+  libcom_err.x86_64 0:1.42.9-17.el7                                             
+  libcurl.x86_64 0:7.29.0-57.el7                                                
+  libdb.x86_64 0:5.3.21-25.el7                                                  
+  libdb-utils.x86_64 0:5.3.21-25.el7                                            
+  libedit.x86_64 0:3.0-12.20121213cvs.el7                                       
+  libffi.x86_64 0:3.0.13-19.el7                                                 
+  libgcc.x86_64 0:4.8.5-39.el7                                                  
+  libgcrypt.x86_64 0:1.5.3-14.el7                                               
+  libgpg-error.x86_64 0:1.12-3.el7                                              
+  libidn.x86_64 0:1.28-4.el7                                                    
+  libmnl.x86_64 0:1.0.3-7.el7                                                   
+  libmount.x86_64 0:2.23.2-63.el7                                               
+  libnetfilter_conntrack.x86_64 0:1.0.6-1.el7_3                                 
+  libnfnetlink.x86_64 0:1.0.1-4.el7                                             
+  libpwquality.x86_64 0:1.2.3-5.el7                                             
+  libseccomp.x86_64 0:2.3.1-4.el7                                               
+  libselinux.x86_64 0:2.5-15.el7                                                
+  libsemanage.x86_64 0:2.5-14.el7                                               
+  libsepol.x86_64 0:2.5-10.el7                                                  
+  libsmartcols.x86_64 0:2.23.2-63.el7                                           
+  libssh2.x86_64 0:1.8.0-3.el7                                                  
+  libstdc++.x86_64 0:4.8.5-39.el7                                               
+  libtasn1.x86_64 0:4.10-1.el7                                                  
+  libuser.x86_64 0:0.60-9.el7                                                   
+  libutempter.x86_64 0:1.1.6-4.el7                                              
+  libuuid.x86_64 0:2.23.2-63.el7                                                
+  libverto.x86_64 0:0.2.5-4.el7                                                 
+  libxml2.x86_64 0:2.9.1-6.el7.4                                                
+  lua.x86_64 0:5.1.4-15.el7                                                     
+  lz4.x86_64 0:1.7.5-3.el7                                                      
+  ncurses.x86_64 0:5.9-14.20130511.el7_4                                        
+  ncurses-base.noarch 0:5.9-14.20130511.el7_4                                   
+  ncurses-libs.x86_64 0:5.9-14.20130511.el7_4                                   
+  nspr.x86_64 0:4.21.0-1.el7                                                    
+  nss.x86_64 0:3.44.0-7.el7_7                                                   
+  nss-pem.x86_64 0:1.0.3-7.el7                                                  
+  nss-softokn.x86_64 0:3.44.0-8.el7_7                                           
+  nss-softokn-freebl.x86_64 0:3.44.0-8.el7_7                                    
+  nss-sysinit.x86_64 0:3.44.0-7.el7_7                                           
+  nss-tools.x86_64 0:3.44.0-7.el7_7                                             
+  nss-util.x86_64 0:3.44.0-4.el7_7                                              
+  openldap.x86_64 0:2.4.44-21.el7_6                                             
+  openssl-libs.x86_64 1:1.0.2k-19.el7                                           
+  p11-kit.x86_64 0:0.23.5-3.el7                                                 
+  p11-kit-trust.x86_64 0:0.23.5-3.el7                                           
+  pam.x86_64 0:1.1.8-23.el7                                                     
+  pcre.x86_64 0:8.32-17.el7                                                     
+  pkgconfig.x86_64 1:0.27.1-4.el7                                               
+  popt.x86_64 0:1.13-16.el7                                                     
+  procps-ng.x86_64 0:3.3.10-27.el7                                              
+  qrencode-libs.x86_64 0:3.4.1-3.el7                                            
+  readline.x86_64 0:6.2-11.el7                                                  
+  rpm.x86_64 0:4.11.3-43.el7                                                    
+  rpm-libs.x86_64 0:4.11.3-43.el7                                               
+  sed.x86_64 0:4.2.2-6.el7                                                      
+  setup.noarch 0:2.8.71-11.el7                                                  
+  shadow-utils.x86_64 2:4.6-5.el7                                               
+  shared-mime-info.x86_64 0:1.8-5.el7                                           
+  sqlite.x86_64 0:3.7.17-8.el7_7.1                                              
+  systemd-libs.x86_64 0:219-73.el7.1                                            
+  tar.x86_64 2:1.26-35.el7                                                      
+  tzdata.noarch 0:2019c-1.el7                                                   
+  ustr.x86_64 0:1.0.4-16.el7                                                    
+  util-linux.x86_64 0:2.23.2-63.el7                                             
+  xz.x86_64 0:5.2.2-1.el7                                                       
+  xz-libs.x86_64 0:5.2.2-1.el7                                                  
+  zlib.x86_64 0:1.2.7-18.el7                                                    
+
+Complete!
+INFO: Create symlink to /tmp in /var to create private temporal directories with systemd
+INFO: Create /rootfs/etc
+INFO: Configure chrony file /rootfs/etc/chrony.conf
+INFO: Pull Agent source code
+INFO: Build agent
+/home/kata-containers/kata-runtime/vendor/src/github.com/kata-containers/agent /
+[OK] Pull Agent source code
+INFO: checkout failed!
+fatal: Not a git repository (or any parent up to mount point /home/kata-containers/kata-runtime/vendor)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+rm -f kata-agent kata-agent.service
+fatal: Not a git repository (or any parent up to mount point /home/kata-containers/kata-runtime/vendor)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+go build -buildmode=pie -tags "" -o kata-agent \
+	-ldflags "-X main.version=1.11.3 -X main.seccompSupport=no  "
+fatal: Not a git repository (or any parent up to mount point /home/kata-containers/kata-runtime/vendor)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+install -D kata-agent /rootfs/usr/bin/kata-agent
+Installing systemd unit files...
+install -D -m 644 kata-agent.service /rootfs/usr/lib/systemd/system/kata-agent.service || exit 1; 	install -D -m 644 kata-containers.target /rootfs/usr/lib/systemd/system/kata-containers.target || exit 1;
+/
+INFO: Check init is installed
+[OK] Agent installed
+[OK] init is installed
+INFO: Create /etc/resolv.conf file in rootfs if not exist
+INFO: Creating summary file
+INFO: Created summary file '/var/lib/osbuilder/osbuilder.yaml' inside rootfs
+
+Script done on 2020-10-14 04:27:09+00:00 [COMMAND_EXIT_CODE="0"]

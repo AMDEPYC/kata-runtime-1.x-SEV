@@ -1,0 +1,208 @@
+Script started on 2020-10-14 04:38:09+00:00 [TERM="xterm" TTY="/dev/pts/1" COLUMNS="172" LINES="49"]
+Sending build context to Docker daemon  23.55kB
+Step 1/3 : From docker.io/fedora:latest
+ ---> 6d474a97d958
+Step 2/3 : RUN [ -n "$http_proxy" ] && sed -i '$ a proxy='$http_proxy /etc/dnf/dnf.conf ; true
+ ---> Using cache
+ ---> 51fc795f5de5
+Step 3/3 : RUN dnf install -y qemu-img parted gdisk e2fsprogs gcc xfsprogs findutils
+ ---> Running in 8d482a58388e
+Fedora 32 openh264 (From Cisco) - x86_64        3.0 kB/s | 2.5 kB     00:00    
+Fedora Modular 32 - x86_64                      6.8 MB/s | 4.9 MB     00:00    
+Fedora Modular 32 - x86_64 - Updates            2.4 MB/s | 3.7 MB     00:01    
+Fedora 32 - x86_64 - Updates                    9.7 MB/s |  26 MB     00:02    
+Fedora 32 - x86_64                              1.3 MB/s |  70 MB     00:54    
+Dependencies resolved.
+================================================================================
+ Package                       Arch      Version               Repository  Size
+================================================================================
+Installing:
+ e2fsprogs                     x86_64    1.45.5-3.fc32         fedora     1.0 M
+ findutils                     x86_64    1:4.7.0-4.fc32        updates    552 k
+ gcc                           x86_64    10.2.1-1.fc32         updates     30 M
+ gdisk                         x86_64    1.0.5-1.fc32          fedora     254 k
+ parted                        x86_64    3.3-3.fc32            fedora     591 k
+ qemu-img                      x86_64    2:4.2.1-1.fc32        updates    1.1 M
+ xfsprogs                      x86_64    5.4.0-3.fc32          fedora     1.1 M
+Installing dependencies:
+ binutils                      x86_64    2.34-5.fc32           updates    5.4 M
+ binutils-gold                 x86_64    2.34-5.fc32           updates    852 k
+ cpp                           x86_64    10.2.1-1.fc32         updates    9.4 M
+ e2fsprogs-libs                x86_64    1.45.5-3.fc32         fedora     218 k
+ elfutils-debuginfod-client    x86_64    0.181-1.fc32          updates     33 k
+ fuse-libs                     x86_64    2.9.9-9.fc32          fedora     101 k
+ glibc-devel                   x86_64    2.31-4.fc32           updates    1.0 M
+ glibc-headers                 x86_64    2.31-4.fc32           updates    457 k
+ isl                           x86_64    0.16.1-10.fc32        fedora     872 k
+ kernel-headers                x86_64    5.8.11-200.fc32       updates    1.2 M
+ libaio                        x86_64    0.3.111-7.fc32        fedora      24 k
+ libmpc                        x86_64    1.1.0-8.fc32          fedora      59 k
+ libpkgconf                    x86_64    1.6.3-3.fc32          fedora      35 k
+ libss                         x86_64    1.45.5-3.fc32         fedora      33 k
+ libxcrypt-devel               x86_64    4.4.17-1.fc32         updates     32 k
+ pkgconf                       x86_64    1.6.3-3.fc32          fedora      41 k
+ pkgconf-m4                    noarch    1.6.3-3.fc32          fedora      14 k
+ pkgconf-pkg-config            x86_64    1.6.3-3.fc32          fedora     9.7 k
+
+Transaction Summary
+================================================================================
+Install  25 Packages
+
+Total download size: 54 M
+Installed size: 169 M
+Downloading Packages:
+(1/25): binutils-gold-2.34-5.fc32.x86_64.rpm    605 kB/s | 852 kB     00:01    
+(2/25): elfutils-debuginfod-client-0.181-1.fc32 535 kB/s |  33 kB     00:00    
+(3/25): findutils-4.7.0-4.fc32.x86_64.rpm       1.3 MB/s | 552 kB     00:00    
+(4/25): binutils-2.34-5.fc32.x86_64.rpm         1.1 MB/s | 5.4 MB     00:05    
+(5/25): glibc-devel-2.31-4.fc32.x86_64.rpm      1.5 MB/s | 1.0 MB     00:00    
+(6/25): glibc-headers-2.31-4.fc32.x86_64.rpm    1.4 MB/s | 457 kB     00:00    
+(7/25): cpp-10.2.1-1.fc32.x86_64.rpm            1.4 MB/s | 9.4 MB     00:06    
+(8/25): libxcrypt-devel-4.4.17-1.fc32.x86_64.rp 511 kB/s |  32 kB     00:00    
+(9/25): kernel-headers-5.8.11-200.fc32.x86_64.r 1.6 MB/s | 1.2 MB     00:00    
+(10/25): e2fsprogs-1.45.5-3.fc32.x86_64.rpm     2.0 MB/s | 1.0 MB     00:00    
+(11/25): qemu-img-4.2.1-1.fc32.x86_64.rpm       1.3 MB/s | 1.1 MB     00:00    
+(12/25): fuse-libs-2.9.9-9.fc32.x86_64.rpm      329 kB/s | 101 kB     00:00    
+(13/25): e2fsprogs-libs-1.45.5-3.fc32.x86_64.rp 336 kB/s | 218 kB     00:00    
+(14/25): gdisk-1.0.5-1.fc32.x86_64.rpm          214 kB/s | 254 kB     00:01    
+(15/25): libaio-0.3.111-7.fc32.x86_64.rpm       184 kB/s |  24 kB     00:00    
+(16/25): libmpc-1.1.0-8.fc32.x86_64.rpm         243 kB/s |  59 kB     00:00    
+(17/25): libpkgconf-1.6.3-3.fc32.x86_64.rpm     281 kB/s |  35 kB     00:00    
+(18/25): libss-1.45.5-3.fc32.x86_64.rpm         265 kB/s |  33 kB     00:00    
+(19/25): parted-3.3-3.fc32.x86_64.rpm           456 kB/s | 591 kB     00:01    
+(20/25): pkgconf-1.6.3-3.fc32.x86_64.rpm        321 kB/s |  41 kB     00:00    
+(21/25): isl-0.16.1-10.fc32.x86_64.rpm          266 kB/s | 872 kB     00:03    
+(22/25): pkgconf-m4-1.6.3-3.fc32.noarch.rpm     209 kB/s |  14 kB     00:00    
+(23/25): pkgconf-pkg-config-1.6.3-3.fc32.x86_64 148 kB/s | 9.7 kB     00:00    
+(24/25): xfsprogs-5.4.0-3.fc32.x86_64.rpm       945 kB/s | 1.1 MB     00:01    
+(25/25): gcc-10.2.1-1.fc32.x86_64.rpm           1.6 MB/s |  30 MB     00:18    
+--------------------------------------------------------------------------------
+Total                                           2.5 MB/s |  54 MB     00:21     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : libmpc-1.1.0-8.fc32.x86_64                            1/25 
+  Installing       : cpp-10.2.1-1.fc32.x86_64                              2/25 
+  Installing       : pkgconf-m4-1.6.3-3.fc32.noarch                        3/25 
+  Installing       : libss-1.45.5-3.fc32.x86_64                            4/25 
+  Installing       : libpkgconf-1.6.3-3.fc32.x86_64                        5/25 
+  Installing       : pkgconf-1.6.3-3.fc32.x86_64                           6/25 
+  Installing       : pkgconf-pkg-config-1.6.3-3.fc32.x86_64                7/25 
+  Installing       : libaio-0.3.111-7.fc32.x86_64                          8/25 
+  Installing       : isl-0.16.1-10.fc32.x86_64                             9/25 
+  Installing       : fuse-libs-2.9.9-9.fc32.x86_64                        10/25 
+  Installing       : e2fsprogs-libs-1.45.5-3.fc32.x86_64                  11/25 
+  Installing       : kernel-headers-5.8.11-200.fc32.x86_64                12/25 
+  Running scriptlet: glibc-headers-2.31-4.fc32.x86_64                     13/25 
+  Installing       : glibc-headers-2.31-4.fc32.x86_64                     13/25 
+  Installing       : libxcrypt-devel-4.4.17-1.fc32.x86_64                 14/25 
+  Installing       : glibc-devel-2.31-4.fc32.x86_64                       15/25 
+  Installing       : elfutils-debuginfod-client-0.181-1.fc32.x86_64       16/25 
+  Installing       : binutils-gold-2.34-5.fc32.x86_64                     17/25 
+  Installing       : binutils-2.34-5.fc32.x86_64                          18/25 
+  Running scriptlet: binutils-2.34-5.fc32.x86_64                          18/25 
+  Installing       : gcc-10.2.1-1.fc32.x86_64                             19/25 
+  Installing       : e2fsprogs-1.45.5-3.fc32.x86_64                       20/25 
+  Installing       : qemu-img-2:4.2.1-1.fc32.x86_64                       21/25 
+  Installing       : xfsprogs-5.4.0-3.fc32.x86_64                         22/25 
+  Installing       : parted-3.3-3.fc32.x86_64                             23/25 
+  Installing       : gdisk-1.0.5-1.fc32.x86_64                            24/25 
+  Installing       : findutils-1:4.7.0-4.fc32.x86_64                      25/25 
+  Running scriptlet: findutils-1:4.7.0-4.fc32.x86_64                      25/25 
+  Verifying        : binutils-2.34-5.fc32.x86_64                           1/25 
+  Verifying        : binutils-gold-2.34-5.fc32.x86_64                      2/25 
+  Verifying        : cpp-10.2.1-1.fc32.x86_64                              3/25 
+  Verifying        : elfutils-debuginfod-client-0.181-1.fc32.x86_64        4/25 
+  Verifying        : findutils-1:4.7.0-4.fc32.x86_64                       5/25 
+  Verifying        : gcc-10.2.1-1.fc32.x86_64                              6/25 
+  Verifying        : glibc-devel-2.31-4.fc32.x86_64                        7/25 
+  Verifying        : glibc-headers-2.31-4.fc32.x86_64                      8/25 
+  Verifying        : kernel-headers-5.8.11-200.fc32.x86_64                 9/25 
+  Verifying        : libxcrypt-devel-4.4.17-1.fc32.x86_64                 10/25 
+  Verifying        : qemu-img-2:4.2.1-1.fc32.x86_64                       11/25 
+  Verifying        : e2fsprogs-1.45.5-3.fc32.x86_64                       12/25 
+  Verifying        : e2fsprogs-libs-1.45.5-3.fc32.x86_64                  13/25 
+  Verifying        : fuse-libs-2.9.9-9.fc32.x86_64                        14/25 
+  Verifying        : gdisk-1.0.5-1.fc32.x86_64                            15/25 
+  Verifying        : isl-0.16.1-10.fc32.x86_64                            16/25 
+  Verifying        : libaio-0.3.111-7.fc32.x86_64                         17/25 
+  Verifying        : libmpc-1.1.0-8.fc32.x86_64                           18/25 
+  Verifying        : libpkgconf-1.6.3-3.fc32.x86_64                       19/25 
+  Verifying        : libss-1.45.5-3.fc32.x86_64                           20/25 
+  Verifying        : parted-3.3-3.fc32.x86_64                             21/25 
+  Verifying        : pkgconf-1.6.3-3.fc32.x86_64                          22/25 
+  Verifying        : pkgconf-m4-1.6.3-3.fc32.noarch                       23/25 
+  Verifying        : pkgconf-pkg-config-1.6.3-3.fc32.x86_64               24/25 
+  Verifying        : xfsprogs-5.4.0-3.fc32.x86_64                         25/25 
+
+Installed:
+  binutils-2.34-5.fc32.x86_64                                                   
+  binutils-gold-2.34-5.fc32.x86_64                                              
+  cpp-10.2.1-1.fc32.x86_64                                                      
+  e2fsprogs-1.45.5-3.fc32.x86_64                                                
+  e2fsprogs-libs-1.45.5-3.fc32.x86_64                                           
+  elfutils-debuginfod-client-0.181-1.fc32.x86_64                                
+  findutils-1:4.7.0-4.fc32.x86_64                                               
+  fuse-libs-2.9.9-9.fc32.x86_64                                                 
+  gcc-10.2.1-1.fc32.x86_64                                                      
+  gdisk-1.0.5-1.fc32.x86_64                                                     
+  glibc-devel-2.31-4.fc32.x86_64                                                
+  glibc-headers-2.31-4.fc32.x86_64                                              
+  isl-0.16.1-10.fc32.x86_64                                                     
+  kernel-headers-5.8.11-200.fc32.x86_64                                         
+  libaio-0.3.111-7.fc32.x86_64                                                  
+  libmpc-1.1.0-8.fc32.x86_64                                                    
+  libpkgconf-1.6.3-3.fc32.x86_64                                                
+  libss-1.45.5-3.fc32.x86_64                                                    
+  libxcrypt-devel-4.4.17-1.fc32.x86_64                                          
+  parted-3.3-3.fc32.x86_64                                                      
+  pkgconf-1.6.3-3.fc32.x86_64                                                   
+  pkgconf-m4-1.6.3-3.fc32.noarch                                                
+  pkgconf-pkg-config-1.6.3-3.fc32.x86_64                                        
+  qemu-img-2:4.2.1-1.fc32.x86_64                                                
+  xfsprogs-5.4.0-3.fc32.x86_64                                                  
+
+Complete!
+Removing intermediate container 8d482a58388e
+ ---> f3cbc7625cbd
+Successfully built f3cbc7625cbd
+Successfully tagged image-builder-osbuilder:latest
+[OK] init is installed
+[OK] init is systemd
+INFO: Creating raw disk with size 510M
+INFO: Creating partitions
+[OK] Image file created
+[OK] Partitions created
+INFO: Set filesystem reserved blocks percentage to 3%
+tune2fs 1.45.5 (07-Jan-2020)
+Setting reserved blocks percentage to 3% (3901 blocks)
+INFO: Mounting root partition
+INFO: Copying content from rootfs to root partition
+[OK] root partition mounted
+INFO: Removing unneeded systemd services and sockets
+[OK] rootfs copied
+INFO: Removing unneeded systemd files
+INFO: Creating empty machine-id to allow systemd to bind-mount it
+INFO: Unmounting root partition
+[OK] Root partition unmounted
+e2fsck 1.45.5 (07-Jan-2020)
+/dev/loop35p1: clean, 9613/130048 files, 99005/130048 blocks
+INFO: Creating raw disk with size 512M
+[OK] Image file created
+INFO: Creating partitions
+[OK] Partitions created
+INFO: Set DAX metadata
+Opening file '/image/kata-containers.img.header'
+Writing metadata
+OK!
+1+0 records in
+1+0 records out
+2097152 bytes (2.1 MB, 2.0 MiB) copied, 0.0034537 s, 607 MB/s
+1044480+0 records in
+1044480+0 records out
+534773760 bytes (535 MB, 510 MiB) copied, 0.898898 s, 595 MB/s
+
+Script done on 2020-10-14 04:40:20+00:00 [COMMAND_EXIT_CODE="0"]

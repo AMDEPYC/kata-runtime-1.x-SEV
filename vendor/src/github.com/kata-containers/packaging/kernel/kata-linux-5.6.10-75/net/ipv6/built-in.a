@@ -1,0 +1,102 @@
+!<thin>
+//                                              740       `
+af_inet6.o/
+anycast.o/
+ip6_output.o/
+ip6_input.o/
+addrconf.o/
+addrlabel.o/
+route.o/
+ip6_fib.o/
+ipv6_sockglue.o/
+ndisc.o/
+udp.o/
+udplite.o/
+raw.o/
+icmp.o/
+mcast.o/
+reassembly.o/
+tcp_ipv6.o/
+ping.o/
+exthdrs.o/
+datagram.o/
+ip6_flowlabel.o/
+inet6_connection_sock.o/
+udp_offload.o/
+seg6.o/
+fib6_notifier.o/
+sysctl_net_ipv6.o/
+xfrm6_policy.o/
+xfrm6_state.o/
+xfrm6_input.o/
+xfrm6_output.o/
+xfrm6_protocol.o/
+netfilter.o/
+fib6_rules.o/
+proc.o/
+syncookies.o/
+netfilter/nf_defrag_ipv6_hooks.o/
+netfilter/nf_conntrack_reasm.o/
+netfilter/nf_log_ipv6.o/
+netfilter/nf_dup_ipv6.o/
+addrconf_core.o/
+exthdrs_core.o/
+ip6_checksum.o/
+ip6_icmp.o/
+output_core.o/
+protocol.o/
+ip6_offload.o/
+tcpv6_offload.o/
+exthdrs_offload.o/
+inet6_hashtables.o/
+mcast_snoop.o/
+/0              0           0     0     644     32144     `
+/12             0           0     0     644     17280     `
+/23             0           0     0     644     41680     `
+/37             0           0     0     644     13136     `
+/50             0           0     0     644     142224    `
+/62             0           0     0     644     13848     `
+/75             0           0     0     644     120952    `
+/84             0           0     0     644     43144     `
+/95             0           0     0     644     22288     `
+/112            0           0     0     644     46632     `
+/121            0           0     0     644     43416     `
+/128            0           0     0     644     7104      `
+/139            0           0     0     644     29192     `
+/146           /0           0     0     644     24984     `
+/154            0           0     0     644     67400     `
+/163            0           0     0     644     13648     `
+/177            0           0     0     644     53664     `
+/189           /0           0     0     644     9920      `
+/197            0           0     0     644     15736     `
+/208            0           0     0     644     18608     `
+/220            0           0     0     644     21048     `
+/237            0           0     0     644     4480      `
+/262            0           0     0     644     6464      `
+/277           /0           0     0     644     7200      `
+/285            0           0     0     644     3488      `
+/302            0           0     0     644     8880      `
+/321            0           0     0     644     11696     `
+/337            0           0     0     644     2720      `
+/352            0           0     0     644     6064      `
+/367            0           0     0     644     7088      `
+/383            0           0     0     644     12640     `
+/401            0           0     0     644     8128      `
+/414            0           0     0     644     14000     `
+/428           /0           0     0     644     16600     `
+/436            0           0     0     644     8968      `
+/450            0           0     0     644     5688      `
+/484            0           0     0     644     12792     `
+/516            0           0     0     644     12360     `
+/541            0           0     0     644     3312      `
+/566            0           0     0     644     7952      `
+/583            0           0     0     644     4608      `
+/599            0           0     0     644     3480      `
+/615            0           0     0     644     3200      `
+/627            0           0     0     644     4096      `
+/642            0           0     0     644     6864      `
+/654            0           0     0     644     11152     `
+/669            0           0     0     644     4408      `
+/686            0           0     0     644     2080      `
+/705            0           0     0     644     12256     `
+/725            0           0     0     644     4592      `

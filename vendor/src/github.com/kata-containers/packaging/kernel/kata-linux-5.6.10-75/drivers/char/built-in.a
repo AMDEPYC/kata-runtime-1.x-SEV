@@ -1,0 +1,15 @@
+!<thin>
+//                                              86        `
+mem.o/
+random.o/
+misc.o/
+virtio_console.o/
+hw_random/core.o/
+hw_random/virtio-rng.o/
+
+/0              0           0     0     644     9000      `
+/7              0           0     0     644     46440     `
+/17             0           0     0     644     9624      `
+/25             0           0     0     644     50408     `
+/43             0           0     0     644     24992     `
+/61             0           0     0     644     8216      `

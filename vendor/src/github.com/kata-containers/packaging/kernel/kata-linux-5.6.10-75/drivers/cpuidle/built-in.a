@@ -1,0 +1,14 @@
+!<thin>
+//                                              74        `
+cpuidle.o/
+driver.o/
+governor.o/
+sysfs.o/
+governors/menu.o/
+poll_state.o/
+/0              0           0     0     644     17040     `
+/11             0           0     0     644     5776      `
+/21             0           0     0     644     5064      `
+/33             0           0     0     644     18776     `
+/42             0           0     0     644     5784      `
+/60             0           0     0     644     2888      `

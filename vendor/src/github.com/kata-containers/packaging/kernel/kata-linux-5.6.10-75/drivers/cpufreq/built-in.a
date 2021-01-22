@@ -1,0 +1,10 @@
+!<thin>
+//                                              64        `
+cpufreq.o/
+freq_table.o/
+cpufreq_performance.o/
+intel_pstate.o/
+/0              0           0     0     644     72376     `
+/11             0           0     0     644     7928      `
+/25             0           0     0     644     4072      `
+/48             0           0     0     644     58488     `

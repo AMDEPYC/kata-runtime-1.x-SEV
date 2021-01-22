@@ -1,0 +1,180 @@
+#
+# Copyright (c) 2018 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+---
+description: |
+  This file contains version details that are used by various
+  repositories for setting up the correct environment to run
+  tests and package components.
+
+format: |
+  Each entry in this file MUST conform to the following format:
+
+  <group>:
+   description: "<brief-description>"
+   notes: "<notes>"
+
+   <project>:
+     description: "<brief-description>"
+     notes: "<notes>"
+     url: "<project-url>"
+     issue: "<bug-url>"
+     commit: "<commit>"
+     version: "<version>"
+     release: "<version>"
+     branch: "<git-branch>"
+     meta:
+       <key-1>: "<value-1>"
+       <key-n>: "<value-n>"
+
+  Notes:
+
+  - All sections (except "meta") MUST include a description where
+    applicable. This is expected to be a brief summary.
+
+  - A section MAY specify a "notes" section which may be multi-line.
+    It is expected to be expand on the information specified in
+    "description".
+
+  - All sections (except "meta") MUST include a URL where applicable.
+
+  - A section MAY specify a bug URL using the "issue" field.
+
+  - A section MAY define a "meta" section to store additional
+    information about a project or group.
+
+  - Each entry MUST specify ATLEAST one of "commit", "version", "release"
+    and "branch".
+
+  - WARNING: Gotcha alert! Remember to double-quote all strings
+    (except multi-line strings)! This avoids the possibility of a
+    version containing a period being treated as a floating point
+    number (and truncated!)
+
+assets:
+  description: "Additional required system elements"
+
+  hypervisor:
+    description: "Component used to create virtual machines"
+
+    qemu-lite:
+      description: "lightweight VMM that uses KVM"
+      url: "https://github.com/kata-containers/qemu"
+      branch: "qemu-lite-2.11.0"
+      commit: "6ba2bfbee9a80bfd03605c5eb2ca743c8b68389e"
+
+    qemu:
+      description: "VMM that uses KVM"
+      url: "https://github.com/qemu/qemu"
+      version: "stable-2.11"
+
+  image:
+    description: |
+      Root filesystem disk image used to boot the guest virtual
+      machine.
+    url: "https://github.com/kata-containers/osbuilder"
+    release: "20640"
+    meta:
+      image-type: "clearlinux"
+
+  initrd:
+    description: |
+      Root filesystem initrd used to boot the guest virtual
+      machine.
+    url: "https://github.com/kata-containers/osbuilder"
+    meta:
+      base-os: "alpine"
+      os-version: "3.7"
+
+  kernel:
+    description: "Linux kernel optimised for virtual machines"
+    url: "https://cdn.kernel.org/pub/linux/kernel/v4.x/"
+    version: "v4.14.51"
+
+components:
+  description: "Core system functionality"
+
+  agent:
+    description: |
+      Container management service running in the guest virtual machines
+      root context.
+    url: "https://github.com/kata-containers/agent"
+    commit: "6f6e9ecd8aded0783c31968b304a9d6589114363"
+
+externals:
+  description: "Third-party projects used by the system"
+
+  cni-plugins:
+    description: "CNI network plugins"
+    url: "https://github.com/containernetworking/plugins"
+    commit: "7f98c94613021d8b57acfa1a2f0c8d0f6fd7ae5a"
+
+  crio:
+    description: |
+      OCI-based Kubernetes Container Runtime Interface implementation
+    url: "https://github.com/kubernetes-incubator/cri-o"
+    version: "e0dd8a3d4c9e5ebc8b25299950bd5b222e3783d3"
+    meta:
+      openshift: "v1.9.11"
+
+  cri-containerd:
+    description: |
+      Containerd Plugin for Kubernetes Container Runtime Interface
+    url: "https://github.com/containerd/cri"
+    version: "v1.0.0"
+    meta:
+      containerd-version: "1.1.0"
+
+  docker:
+    description: "Moby project container manager"
+    notes: "Docker Swarm requires an older version of Docker."
+    url: "https://github.com/moby/moby"
+    version: "v18.03-ce"
+    meta:
+      swarm-version: "1.12.1"
+
+  gometalinter:
+    description: "utility to run various golang linters"
+    url: "https://github.com/alecthomas/gometalinter"
+    version: "v2.0.5"
+
+  kubernetes:
+    description: "Kubernetes project container manager"
+    url: "https://github.com/kubernetes/kubernetes"
+    version: "1.10.5-00"
+
+  openshift:
+    description: |
+      Distribution of Kubernetes optimized for continuous application
+      development and multi-tenant deployment.
+    url: "https://github.com/openshift/origin"
+    version: "v3.9.0"
+    commit: "191fece"
+
+  runc:
+    description: "OCI CLI reference runtime implementation"
+    url: "https://github.com/opencontainers/runc"
+    version: "v1.0.0-rc5"
+
+languages:
+  description: |
+    Details of programming languages requried to build system
+    components.
+
+  golang:
+    description: "Google's 'go' language"
+    notes: "'version' is the default minimum version used by this project."
+    version: "1.8.3"
+    meta:
+      newest-version: "1.10"
+
+specs:
+  description: "Details of important specifications"
+
+  oci:
+    description: "Open Containers Initiative runtime specification"
+    url: "https://github.com/opencontainers/runtime-spec/releases"
+    version: "v1.0.0-rc5"

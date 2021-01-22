@@ -1,0 +1,28 @@
+!<thin>
+//                                              198       `
+pci_hotplug_core.o/
+acpi_pcihp.o/
+pciehp_core.o/
+pciehp_ctrl.o/
+pciehp_pci.o/
+pciehp_hpc.o/
+shpchp_core.o/
+shpchp_ctrl.o/
+shpchp_pci.o/
+shpchp_sysfs.o/
+shpchp_hpc.o/
+acpiphp_core.o/
+acpiphp_glue.o/
+/0              0           0     0     644     16000     `
+/20             0           0     0     644     7512      `
+/34             0           0     0     644     10608     `
+/49             0           0     0     644     13192     `
+/64             0           0     0     644     4632      `
+/78             0           0     0     644     23864     `
+/92             0           0     0     644     16960     `
+/107            0           0     0     644     26256     `
+/122            0           0     0     644     4944      `
+/136            0           0     0     644     3784      `
+/152            0           0     0     644     23976     `
+/166            0           0     0     644     7824      `
+/182            0           0     0     644     25920     `

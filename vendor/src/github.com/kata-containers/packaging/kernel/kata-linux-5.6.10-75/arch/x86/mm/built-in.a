@@ -1,0 +1,43 @@
+!<thin>
+//                                              268       `
+init.o/
+init_64.o/
+fault.o/
+ioremap.o/
+extable.o/
+mmap.o/
+pgtable.o/
+physaddr.o/
+setup_nx.o/
+tlb.o/
+cpu_entry_area.o/
+maccess.o/
+pat/set_memory.o/
+pat/memtype.o/
+pat/memtype_interval.o/
+hugetlbpage.o/
+pti.o/
+mem_encrypt.o/
+mem_encrypt_identity.o/
+mem_encrypt_boot.o/
+
+/0              0           0     0     644     22752     `
+/8              0           0     0     644     40824     `
+/19             0           0     0     644     25416     `
+/28             0           0     0     644     18920     `
+/39             0           0     0     644     9048      `
+/50             0           0     0     644     4896      `
+/58             0           0     0     644     14248     `
+/69             0           0     0     644     1728      `
+/81             0           0     0     644     3456      `
+/93             0           0     0     644     17416     `
+/100            0           0     0     644     32048     `
+/118            0           0     0     644     1824      `
+/129            0           0     0     644     46400     `
+/147            0           0     0     644     25384     `
+/162            0           0     0     644     7400      `
+/186            0           0     0     644     5256      `
+/201            0           0     0     644     13792     `
+/208            0           0     0     644     19360     `
+/223            0           0     0     644     4201768   `
+/247            0           0     0     644     1896      `

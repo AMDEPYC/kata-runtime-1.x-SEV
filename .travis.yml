@@ -1,0 +1,26 @@
+#
+# Copyright (c) 2018 Intel Corporation
+# Copyright (c) 2018 IBM
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+sudo: required
+dist: trusty
+
+language: go
+os:
+- linux
+- linux-ppc64le
+go_import_path: github.com/kata-containers/runtime
+
+go:
+  - 1.8
+
+before_script:
+  - ".ci/static-checks.sh"
+
+install:
+  - cd ${TRAVIS_BUILD_DIR}
+  - make
+  - sudo -E PATH=$PATH make install
